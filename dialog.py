@@ -10,11 +10,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
 class Ui_Dialog(object):
+    Closed= True
     def __init__(self):
         app = QtWidgets.QApplication(sys.argv)
         Dialog = QtWidgets.QDialog()
         self.setupUi(Dialog)
         Dialog.show()
+        self.setClosed(False)
         sys.exit(app.exec_())
     def setupUi(self, Dialog):
 
@@ -93,7 +95,7 @@ class Ui_Dialog(object):
         else:
             long = self.lineEdit_long.text() + "E"
 
-        print(lat, long)
+        self.setClosed(True)
         Dialog.close()
 
     def retranslateUi(self, Dialog):
@@ -107,3 +109,7 @@ class Ui_Dialog(object):
         self.radioButton_S.setText(_translate("Dialog", "S"))
         self.radioButton_W.setText(_translate("Dialog", "W"))
         self.radioButton_E.setText(_translate("Dialog", "E"))
+    def setClosed(self,value):
+        self.Closed=value
+    def getClosed(self):
+        return Closed
