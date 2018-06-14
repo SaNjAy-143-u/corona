@@ -13,8 +13,7 @@ class Ui_Dialog(object):
     def __init__(self):
         app = QtWidgets.QApplication(sys.argv)
         Dialog = QtWidgets.QDialog()
-        ui = Ui_Dialog()
-        ui.setupUi(Dialog)
+        self.setupUi(Dialog)
         Dialog.show()
         sys.exit(app.exec_())
     def setupUi(self, Dialog):
