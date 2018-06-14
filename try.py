@@ -1,6 +1,7 @@
 import matplotlib
 matplotlib.use('TkAgg')
 import numpy as np
+import dialog
 from scipy.spatial import Delaunay 
 from numpy import arange, sin, pi
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
@@ -43,6 +44,7 @@ canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
 
 def onclick(event):
 	addToSrc(event.xdata, event.ydata)
+    dialog.Ui_Dialog();
 cid = f.canvas.mpl_connect('button_press_event', onclick)
 def on_key_event(event):
     print('you pressed %s' % event.key)
