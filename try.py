@@ -1,5 +1,6 @@
 import matplotlib
 matplotlib.use('TkAgg')
+import dialog
 import numpy as np
 from scipy.spatial import Delaunay 
 from numpy import arange, sin, pi
