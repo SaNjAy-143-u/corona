@@ -1,7 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
-class Ui_MainWindow(object):
+class Dialog(object):
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 275)
@@ -38,7 +39,16 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(MainWindow)
+
+        self.pushButton.clicked.connect(self.btn_next)
+
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def btn_next(self):
+        global lat, long
+        lat = self.textEdit.toPlainText()
+        long = self.textEdit_3.toPlainText()
+        print(lat, long)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
