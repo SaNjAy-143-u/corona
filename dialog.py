@@ -95,6 +95,7 @@ class Ui_Dialog(object):
             long = self.lineEdit_long.text() + "E"
 
         print(lat, long)
+        Dialog.close()
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
