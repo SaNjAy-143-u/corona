@@ -1,5 +1,6 @@
 import matplotlib
 matplotlib.use('TkAgg')
+import dialog
 import numpy as np
 import dialog
 from scipy.spatial import Delaunay 

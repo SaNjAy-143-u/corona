@@ -51,7 +51,6 @@ class Ui_Dialog(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-
         self.radioButton_N = QtWidgets.QRadioButton(self.horizontalLayoutWidget)
         self.radioButton_N.setObjectName("radioButton_2")
         self.horizontalLayout.addWidget(self.radioButton_N)
