@@ -15,6 +15,7 @@ if sys.version_info[0] < 3:
 else:
     import tkinter as Tk
 srclist=[]
+deslist=[]
 root = Tk.Tk()
 root.wm_title("Embedding in TK")
 
@@ -32,7 +33,8 @@ a = f.add_subplot(111)
 # If you put root.destroy() here, it will cause an error if
 # the window is closed with the window manager.
 def addToSrc(x,y):
-	srclist.append((x,y))
+    srclist.append((x,y))
+
 a.imshow(im_resized2)
 canvas = FigureCanvasTkAgg(f, master=root)
 canvas.show()
@@ -43,8 +45,11 @@ toolbar.update()
 canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
 
 def onclick(event):
-	addToSrc(event.xdata, event.ydata)
+    addToSrc(event.xdata,event.ydata)
+    dialog.makedialog()
+
 cid = f.canvas.mpl_connect('button_press_event', onclick)
+
 def on_key_event(event):
     print('you pressed %s' % event.key)
     key_press_handler(event, canvas, toolbar)
@@ -55,8 +60,10 @@ canvas.mpl_connect('key_press_event', on_key_event)
 def _quit():
     root.quit()     # stops mainloop
     root.destroy()  # this is necessary on Windows to prevent
+                    # Fatal Python Error: PyEval_RestoreThread: NULL tstate
 def printsrc():
-	print (srclist)                    # Fatal Python Error: PyEval_RestoreThread: NULL tstate
+	print (srclist) 
+
 
 button = Tk.Button(master=root, text='Quit', command=_quit)
 button.pack(side=Tk.BOTTOM)
