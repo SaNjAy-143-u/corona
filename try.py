@@ -49,6 +49,8 @@ a = f.add_subplot(111)
 # a tk.DrawingArea
 # If you put root.destroy() here, it will cause an error if
 # the window is closed with the window manager.
+def addToSrc(x,y):
+    srclist.append((x,y))
 
 a.imshow(im_resized2)
 canvas = FigureCanvasTkAgg(f, master=root)
