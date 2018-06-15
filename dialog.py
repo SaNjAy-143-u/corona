@@ -7,13 +7,21 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
 
 class Ui_Dialog(object):
+    Closed= True
+    def __init__(self):
+        app = QtWidgets.QApplication(sys.argv)
+        Dialog = QtWidgets.QDialog()
+        self.setupUi(Dialog)
+        Dialog.show()
+        self.setClosed(False)
+        sys.exit(app.exec_())
     def setupUi(self, Dialog):
 
         Dialog.setObjectName("Dialog")
         Dialog.resize(431, 258)
-
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(20, 40, 181, 16))
         self.label.setObjectName("label")
@@ -45,7 +53,6 @@ class Ui_Dialog(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-
         self.radioButton_N = QtWidgets.QRadioButton(self.horizontalLayoutWidget)
         self.radioButton_N.setObjectName("radioButton_2")
         self.horizontalLayout.addWidget(self.radioButton_N)
@@ -88,8 +95,8 @@ class Ui_Dialog(object):
         else:
             long = self.lineEdit_long.text() + "E"
 
-        print(lat, long)
-        Dialog.close()
+        self.setClosed(True)
+        
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -102,14 +109,12 @@ class Ui_Dialog(object):
         self.radioButton_S.setText(_translate("Dialog", "S"))
         self.radioButton_W.setText(_translate("Dialog", "W"))
         self.radioButton_E.setText(_translate("Dialog", "E"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
-
+    def setClosed(self,value):
+        self.Closed=value
+    def getClosed(self):
+        return Closed
+def getLatLong():
+    dialog=Ui_Dialog()
+    while(not dialog.getClosed()):
+        pass
+    return (dialog.lat,dialog.long)
