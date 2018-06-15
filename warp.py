@@ -1,6 +1,7 @@
 from PIL import Image
 import numpy as np
 import math
+import cv2
 import scipy.spatial as spatial
 
 class Warp:
@@ -103,7 +104,8 @@ class Warp:
 		#print xmin, xmax, ymin, ymax
 
 		#Determine which tesselation triangle contains each pixel in the shape norm image
-		inTessTriangle = np.ones(dstIm.size, dtype=np.int) * -1
+		inTessTriangle = np.ones(dstIm.shape, dtype=np.int) * -1
+		print (inTessTriangle)
 		for i in range(int(xmin), int(xmax+1.)):
 			for j in range(int(ymin), int(ymax+1.)):
 				if i < 0 or i >= inTessTriangle.shape[0]: continue

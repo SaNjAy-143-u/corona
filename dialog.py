@@ -82,14 +82,14 @@ class Ui_Dialog(object):
     def button_ok(self):
         global lat, long
         if self.radioButton_N.isChecked():
-            lat = self.lineEdit_lat.text() + "N"
+            lat = float(self.lineEdit_lat.text())
         else:
-            lat = self.lineEdit_lat.text() + "S"
+            lat = -float(self.lineEdit_lat.text())
 
         if self.radioButton_W.isChecked():
-            long = self.lineEdit_long.text() + "W"
+            long = -float(self.lineEdit_long.text())
         else:
-            long = self.lineEdit_long.text() + "E"
+            long = float(self.lineEdit_long.text())
 
         Dialog.accept()
         self.setClosed(True)

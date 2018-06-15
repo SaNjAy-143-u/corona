@@ -2,13 +2,9 @@ import matplotlib
 matplotlib.use('TkAgg')
 import dialog
 import numpy as np
-<<<<<<< HEAD
 from PIL import Image
-import dialog
 import warp
-=======
 from dialog import Ui_Dialog
->>>>>>> Naman1998-master
 from scipy.spatial import Delaunay 
 from numpy import arange, sin, pi
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
@@ -18,7 +14,7 @@ from matplotlib.figure import Figure
 import cv2
 import sys
 
-imgLoc = "C:/Users/Naman/Desktop/images.jpg"
+imgLoc = "/media/sanjay/OS/CORONA/38/DS1025-1039DF038_a.tif"
 
 if sys.version_info[0] < 3:
     import Tkinter as Tk
@@ -26,12 +22,12 @@ else:
     import tkinter as Tk
 srclist=[]
 dstlist=[]
-img = Image.open("/media/sanjay/OS/CORONA/38/DS1025-1039DF038_a.tif")
-im_resized2 = cv2.resize(img.mode,(224,224))
+img = cv2.imread(imgLoc)
+im_resized2 = cv2.resize(img,(224,224))
 f = Figure(figsize=(5, 4), dpi=100)
 a = f.add_subplot(111)
 
-dstImg=Image.new(img,(500,500))
+dstImg=im_resized2
 root = Tk.Tk()
 root.wm_title("Embedding in TK")
 
