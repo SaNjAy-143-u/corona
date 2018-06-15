@@ -96,7 +96,7 @@ class Ui_Dialog(object):
             long = self.lineEdit_long.text() + "E"
 
         self.setClosed(True)
-        Dialog.close()
+        
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -113,3 +113,8 @@ class Ui_Dialog(object):
         self.Closed=value
     def getClosed(self):
         return Closed
+def getLatLong():
+    dialog=Ui_Dialog()
+    while(not dialog.getClosed()):
+        pass
+    return (dialog.lat,dialog.long)

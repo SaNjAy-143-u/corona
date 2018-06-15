@@ -20,6 +20,22 @@ dstlist=[]
 root = Tk.Tk()
 root.wm_title("Embedding in TK")
 
+def addToSrc(x,y):
+    srclist.append((x,y))
+
+def onclick(event):
+    addToSrc(event.xdata, event.ydata)
+    dstlist.append(dialog.getLatLong())
+
+def _quit():
+    root.quit()     # stops mainloop
+    root.destroy()  # this is necessary on Windows to prevent
+
+def printsrc():
+    print (srclist,dstlist)                    # Fatal Python Error: PyEval_RestoreThread: NULL tstate
+
+
+
 img = cv2.imread("/media/sanjay/OS/CORONA/38/DS1025-1039DF038_a.tif")
 im_resized2 = cv2.resize(img, (224, 224))
 f = Figure(figsize=(5, 4), dpi=100)
@@ -33,10 +49,6 @@ a = f.add_subplot(111)
 # a tk.DrawingArea
 # If you put root.destroy() here, it will cause an error if
 # the window is closed with the window manager.
-def addToSrc(x,y):
-	srclist.append((x,y))
-
-
 
 a.imshow(im_resized2)
 canvas = FigureCanvasTkAgg(f, master=root)
@@ -46,28 +58,8 @@ canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
 toolbar = NavigationToolbar2TkAgg(canvas, root)
 toolbar.update()
 canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+f.canvas.mpl_connect('button_press_event', onclick)
 
-def onclick(event):
-    addToSrc(event.xdata, event.ydata)
-    dialog.Ui_Dialog()
-    while(not dialog.getClosed()):
-        pass
-    dstlist.append((dialog.lat,dialog.long))
-
-
-cid = f.canvas.mpl_connect('button_press_event', onclick)
-def on_key_event(event):
-    print('you pressed %s' % event.key)
-    key_press_handler(event, canvas, toolbar)
-
-canvas.mpl_connect('key_press_event', on_key_event)
-
-
-def _quit():
-    root.quit()     # stops mainloop
-    root.destroy()  # this is necessary on Windows to prevent
-def printsrc():
-	print (srclist,dstlist)                    # Fatal Python Error: PyEval_RestoreThread: NULL tstate
 
 button = Tk.Button(master=root, text='Quit', command=_quit)
 button.pack(side=Tk.BOTTOM)
