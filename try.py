@@ -37,7 +37,7 @@ def printsrc():
 
 
 img = cv2.imread("/media/sanjay/OS/CORONA/38/DS1025-1039DF038_a.tif")
-im_resized2 = cv2.resize(img, (224, 224))
+im_resized2 = cv2.resize(img,(224,224))
 f = Figure(figsize=(5, 4), dpi=100)
 a = f.add_subplot(111)
 #edges=cv2.Canny(im_resized,224,224)
