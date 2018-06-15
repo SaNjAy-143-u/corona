@@ -2,6 +2,7 @@ import matplotlib
 matplotlib.use('TkAgg')
 import dialog
 import numpy as np
+import dialog
 from scipy.spatial import Delaunay 
 from numpy import arange, sin, pi
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
@@ -15,9 +16,25 @@ if sys.version_info[0] < 3:
 else:
     import tkinter as Tk
 srclist=[]
-deslist=[]
+dstlist=[]
 root = Tk.Tk()
 root.wm_title("Embedding in TK")
+
+def addToSrc(x,y):
+    srclist.append((x,y))
+
+def onclick(event):
+    addToSrc(event.xdata, event.ydata)
+    dstlist.append(dialog.getLatLong())
+
+def _quit():
+    root.quit()     # stops mainloop
+    root.destroy()  # this is necessary on Windows to prevent
+
+def printsrc():
+    print (srclist,dstlist)                    # Fatal Python Error: PyEval_RestoreThread: NULL tstate
+
+
 
 img = cv2.imread("/media/sanjay/OS/CORONA/38/DS1025-1039DF038_a.tif")
 im_resized2 = cv2.resize(img, (224, 224))
@@ -43,26 +60,7 @@ canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
 toolbar = NavigationToolbar2TkAgg(canvas, root)
 toolbar.update()
 canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
-
-def onclick(event):
-    addToSrc(event.xdata,event.ydata)
-    dialog.makedialog()
-
-cid = f.canvas.mpl_connect('button_press_event', onclick)
-
-def on_key_event(event):
-    print('you pressed %s' % event.key)
-    key_press_handler(event, canvas, toolbar)
-
-canvas.mpl_connect('key_press_event', on_key_event)
-
-
-def _quit():
-    root.quit()     # stops mainloop
-    root.destroy()  # this is necessary on Windows to prevent
-                    # Fatal Python Error: PyEval_RestoreThread: NULL tstate
-def printsrc():
-	print (srclist) 
+f.canvas.mpl_connect('button_press_event', onclick)
 
 
 button = Tk.Button(master=root, text='Quit', command=_quit)
