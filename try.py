@@ -2,7 +2,9 @@ import matplotlib
 matplotlib.use('TkAgg')
 import dialog
 import numpy as np
+from PIL import Image
 import dialog
+import warp
 from scipy.spatial import Delaunay 
 from numpy import arange, sin, pi
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
@@ -17,6 +19,12 @@ else:
     import tkinter as Tk
 srclist=[]
 dstlist=[]
+img = Image.open("/media/sanjay/OS/CORONA/38/DS1025-1039DF038_a.tif")
+im_resized2 = cv2.resize(img.mode,(224,224))
+f = Figure(figsize=(5, 4), dpi=100)
+a = f.add_subplot(111)
+
+dstImg=Image.new(img,(500,500))
 root = Tk.Tk()
 root.wm_title("Embedding in TK")
 
@@ -34,12 +42,11 @@ def _quit():
 def printsrc():
     print (srclist,dstlist)                    # Fatal Python Error: PyEval_RestoreThread: NULL tstate
 
+def startWarping():
+	warp.Warping(im_resized2,srclist,dstImg,dstlist)
+	cv2.imshow(dstImg)
 
 
-img = cv2.imread("/media/sanjay/OS/CORONA/38/DS1025-1039DF038_a.tif")
-im_resized2 = cv2.resize(img,(224,224))
-f = Figure(figsize=(5, 4), dpi=100)
-a = f.add_subplot(111)
 #edges=cv2.Canny(im_resized,224,224)
 
 #points=np.array([[0,50],[0,150],[200,50],[150,150],[50,0],[200,0]])
@@ -62,7 +69,8 @@ toolbar.update()
 canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
 f.canvas.mpl_connect('button_press_event', onclick)
 
-
+proceedButton=Tk.Button(master=root, text='Proceed',command= startWarping)
+proceedButton.pack(side=Tk.LEFT)
 button = Tk.Button(master=root, text='Quit', command=_quit)
 button.pack(side=Tk.BOTTOM)
 button2=Tk.Button(master=root,text='print list',command=printsrc)
