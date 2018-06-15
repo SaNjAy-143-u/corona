@@ -12,12 +12,8 @@ import sys
 class Ui_Dialog(object):
     Closed= True
     def __init__(self):
-        app = QtWidgets.QApplication(sys.argv)
-        Dialog = QtWidgets.QDialog()
-        self.setupUi(Dialog)
-        Dialog.show()
         self.setClosed(False)
-        sys.exit(app.exec_())
+        
     def setupUi(self, Dialog):
 
         Dialog.setObjectName("Dialog")
@@ -112,9 +108,14 @@ class Ui_Dialog(object):
     def setClosed(self,value):
         self.Closed=value
     def getClosed(self):
-        return Closed
+        return self.Closed
 def getLatLong():
+    app = QtWidgets.QApplication(sys.argv)
+    Dialog = QtWidgets.QDialog()
     dialog=Ui_Dialog()
+    dialog.setupUi(Dialog)
+    Dialog.show()
     while(not dialog.getClosed()):
         pass
     return (dialog.lat,dialog.long)
+    sys.exit(app.exec_())
