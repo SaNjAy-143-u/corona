@@ -2,9 +2,13 @@ import matplotlib
 matplotlib.use('TkAgg')
 import dialog
 import numpy as np
+<<<<<<< HEAD
 from PIL import Image
 import dialog
 import warp
+=======
+from dialog import Ui_Dialog
+>>>>>>> Naman1998-master
 from scipy.spatial import Delaunay 
 from numpy import arange, sin, pi
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
@@ -13,6 +17,9 @@ from matplotlib.backend_bases import key_press_handler
 from matplotlib.figure import Figure
 import cv2
 import sys
+
+imgLoc = "C:/Users/Naman/Desktop/images.jpg"
+
 if sys.version_info[0] < 3:
     import Tkinter as Tk
 else:
@@ -45,7 +52,6 @@ def printsrc():
 def startWarping():
 	warp.Warping(im_resized2,srclist,dstImg,dstlist)
 	cv2.imshow(dstImg)
-
 
 #edges=cv2.Canny(im_resized,224,224)
 

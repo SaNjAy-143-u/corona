@@ -91,6 +91,7 @@ class Ui_Dialog(object):
         else:
             long = self.lineEdit_long.text() + "E"
 
+        Dialog.accept()
         self.setClosed(True)
         
 
@@ -110,12 +111,14 @@ class Ui_Dialog(object):
     def getClosed(self):
         return self.Closed
 def getLatLong():
+    global Dialog
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     dialog=Ui_Dialog()
     dialog.setupUi(Dialog)
     Dialog.show()
+    Dialog.exec()
     while(not dialog.getClosed()):
         pass
-    return (dialog.lat,dialog.long)
-    sys.exit(app.exec_())
+    return (lat,long)
+
