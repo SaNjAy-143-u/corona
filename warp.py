@@ -125,8 +125,8 @@ class Warp:
 
 		#Prepare arrays, check they are 3D	
 		targetArr = np.copy(np.asarray(dstIm, dtype=np.uint8))
-		srcArr = srcArr.reshape(srcArr.shape[0], srcArr.shape[1], len(srcIm.mode))
-		targetArr = targetArr.reshape(targetArr.shape[0], targetArr.shape[1], len(dstIm.mode))
+		srcArr = srcArr.reshape(srcArr.shape[0], srcArr.shape[1], 3)
+		targetArr = targetArr.reshape(targetArr.shape[0], targetArr.shape[1], 3)
 
 		#Calculate pixel colours
 		self.WarpProcessing(srcIm, srcArr, targetArr, inTessTriangle, triAffines, dstPoints)
@@ -134,7 +134,7 @@ class Warp:
 		#Convert single channel images to 2D
 		if targetArr.shape[2] == 1:
 			targetArr = targetArr.reshape((targetArr.shape[0],targetArr.shape[1]))
-		dstIm.paste(Image.fromarray(targetArr))
+		dstIm.tolist().paste(Image.fromarray(targetArr))
 
 def Warping(srcIm,srcCloud,dstIm,dstCloud):
 	warpObj=Warp()
