@@ -14,7 +14,7 @@ from matplotlib.figure import Figure
 import cv2
 import sys
 
-imgLoc = "/media/sanjay/OS/CORONA/38/DS1025-1039DF038_a.tif"
+imgLoc = "C:/Users/Naman/Desktop/indonesia-lat-long.jpg"
 
 if sys.version_info[0] < 3:
     import Tkinter as Tk
@@ -43,11 +43,13 @@ def _quit():
     root.destroy()  # this is necessary on Windows to prevent
 
 def printsrc():
-    print (srclist,dstlist)                    # Fatal Python Error: PyEval_RestoreThread: NULL tstate
+    print (srclist,dstlist)
+    # Fatal Python Error: PyEval_RestoreThread: NULL tstate
 
 def startWarping():
-	dstImg=warp.Warping(im_resized2,srclist,dstImg,dstlist)
-	cv2.imshow("warped",dstImg)
+    dstImg = im_resized2
+    dstImg=warp.Warping(im_resized2,srclist,dstImg,dstlist)
+    cv2.imshow("warped",dstImg)
 
 #edges=cv2.Canny(im_resized,224,224)
 
