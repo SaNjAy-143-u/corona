@@ -46,7 +46,7 @@ def printsrc():
     print (srclist,dstlist)                    # Fatal Python Error: PyEval_RestoreThread: NULL tstate
 
 def startWarping():
-	warp.Warping(im_resized2,srclist,dstImg,dstlist)
+	dstImg=warp.Warping(im_resized2,srclist,dstImg,dstlist)
 	cv2.imshow("warped",dstImg)
 
 #edges=cv2.Canny(im_resized,224,224)
