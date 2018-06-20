@@ -28,13 +28,13 @@ class Ui_MainWindow(object):
         self.outputLabel.setGeometry(QtCore.QRect(30, 110, 161, 16))
         self.outputLabel.setObjectName("label_2")
 
-        self.inputText = QtWidgets.QTextEdit(self.centralwidget)
+        self.inputText = QtWidgets.QLineEdit(self.centralwidget)
         self.inputText.setGeometry(QtCore.QRect(210, 50, 401, 31))
-        self.inputText.setObjectName("textEdit")
+        self.inputText.setObjectName("lineEdit")
 
-        self.outputText = QtWidgets.QTextEdit(self.centralwidget)
+        self.outputText = QtWidgets.QLineEdit(self.centralwidget)
         self.outputText.setGeometry(QtCore.QRect(210, 100, 401, 31))
-        self.outputText.setObjectName("textEdit_3")
+        self.outputText.setObjectName("lineEdit_3")
 
         self.next = QtWidgets.QPushButton(self.centralwidget)
         self.next.setGeometry(QtCore.QRect(340, 180, 93, 28))
@@ -93,9 +93,9 @@ class Ui_MainWindow(object):
 
     def openFolderNameDialog(self):
 
-        file = str(QtWidgets.QFileDialog.getExistingDirectory(QtWidgets.QWidget(), "Select Directory"))
+        folderName = QtWidgets.QFileDialog.getExistingDirectory(QtWidgets.QWidget(), "Select Directory")
 
-        self.outputText.setText(file[0])
+        self.outputText.setText(folderName)
 
 
 def inputWindow():
