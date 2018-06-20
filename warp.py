@@ -3,6 +3,7 @@ import numpy as np
 import math
 import cv2
 import scipy.spatial as spatial
+import scipy.misc
 
 class Warp:
 
@@ -125,8 +126,8 @@ class Warp:
 
 		#Prepare arrays, check they are 3D	
 		targetArr = np.copy(np.asarray(dstIm, dtype=np.uint8))
-		srcArr = srcArr.reshape(srcArr.shape[0], srcArr.shape[1], 3)
-		targetArr = targetArr.reshape(targetArr.shape[0], targetArr.shape[1], 3)
+		srcArr = srcArr.reshape(srcArr.shape[0], srcArr.shape[1], srcIm.shape[2])
+		targetArr = targetArr.reshape(targetArr.shape[0], targetArr.shape[1], dstIm.shape[2])
 
 		#Calculate pixel colours
 		self.WarpProcessing(srcIm, srcArr, targetArr, inTessTriangle, triAffines, dstPoints)
@@ -134,7 +135,7 @@ class Warp:
 		#Convert single channel images to 2D
 		if targetArr.shape[2] == 1:
 			targetArr = targetArr.reshape((targetArr.shape[0],targetArr.shape[1]))
-		dstIm.tolist().paste(Image.fromarray(targetArr))
+		dstIm=scipy.misc.toimage(targetArr)
 
 def Warping(srcIm,srcCloud,dstIm,dstCloud):
 	warpObj=Warp()

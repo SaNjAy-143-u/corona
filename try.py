@@ -47,7 +47,7 @@ def printsrc():
 
 def startWarping():
 	warp.Warping(im_resized2,srclist,dstImg,dstlist)
-	cv2.imshow(dstImg)
+	cv2.imshow("warped",dstImg)
 
 #edges=cv2.Canny(im_resized,224,224)
 
