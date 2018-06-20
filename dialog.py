@@ -9,11 +9,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
+
 class Ui_Dialog(object):
-    Closed= True
+    Closed = True
+
     def __init__(self):
         self.setClosed(False)
-        
+
     def setupUi(self, Dialog):
 
         Dialog.setObjectName("Dialog")
@@ -53,6 +55,8 @@ class Ui_Dialog(object):
         self.radioButton_N.setObjectName("radioButton_2")
         self.horizontalLayout.addWidget(self.radioButton_N)
 
+        self.radioButton_N.setChecked(True)
+
         self.radioButton_S = QtWidgets.QRadioButton(self.horizontalLayoutWidget)
         self.radioButton_S.setObjectName("radioButton")
         self.horizontalLayout.addWidget(self.radioButton_S)
@@ -65,13 +69,22 @@ class Ui_Dialog(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
+        self.radioButton_E = QtWidgets.QRadioButton(self.horizontalLayoutWidget_2)
+        self.radioButton_E.setObjectName("radioButton_3")
+        self.horizontalLayout_2.addWidget(self.radioButton_E)
+
         self.radioButton_W = QtWidgets.QRadioButton(self.horizontalLayoutWidget_2)
-        self.radioButton_W.setObjectName("radioButton_3")
+        self.radioButton_W.setObjectName("radioButton_4")
         self.horizontalLayout_2.addWidget(self.radioButton_W)
 
-        self.radioButton_E = QtWidgets.QRadioButton(self.horizontalLayoutWidget_2)
-        self.radioButton_E.setObjectName("radioButton_4")
-        self.horizontalLayout_2.addWidget(self.radioButton_E)
+        self.radioButton_E.setChecked(True)
+
+        self.dbl_validator = QtGui.QDoubleValidator()
+        self.lineEdit_lat.setValidator(self.dbl_validator)
+        self.lineEdit_long.setValidator(self.dbl_validator)
+
+        self.lineEdit_lat.setPlaceholderText("Eg: 135.1287")
+        self.lineEdit_long.setPlaceholderText("Eg: 78.0254")
 
         self.retranslateUi(Dialog)
 
@@ -93,7 +106,6 @@ class Ui_Dialog(object):
 
         Dialog.accept()
         self.setClosed(True)
-        
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -104,21 +116,25 @@ class Ui_Dialog(object):
         self.pushButton.setText(_translate("Dialog", "OK"))
         self.radioButton_N.setText(_translate("Dialog", "N"))
         self.radioButton_S.setText(_translate("Dialog", "S"))
-        self.radioButton_W.setText(_translate("Dialog", "W"))
         self.radioButton_E.setText(_translate("Dialog", "E"))
-    def setClosed(self,value):
-        self.Closed=value
+        self.radioButton_W.setText(_translate("Dialog", "W"))
+
+    def setClosed(self, value):
+        self.Closed = value
+
     def getClosed(self):
         return self.Closed
+
+
 def getLatLong():
     global Dialog
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    dialog=Ui_Dialog()
+    dialog = Ui_Dialog()
     dialog.setupUi(Dialog)
     Dialog.show()
     Dialog.exec()
-    while(not dialog.getClosed()):
+    while (not dialog.getClosed()):
         pass
-    return (lat,long)
+    return (lat, long)
 

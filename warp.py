@@ -62,7 +62,7 @@ class Warp:
 
 				#Determine which triangle the destination pixel occupies
 				tri = inTriangle[i,j]
-				if tri == -1: 
+				if tri == -1:
 					continue
 					
 				#Calculate position in the input image
