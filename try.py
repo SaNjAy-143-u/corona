@@ -14,7 +14,7 @@ from matplotlib.figure import Figure
 import cv2
 import sys
 
-imgLoc = "C:/Users/Naman/Desktop/indonesia-lat-long.jpg"
+imgLoc = "/home/sanjay/indonesia-lat-long.jpg"
 
 if sys.version_info[0] < 3:
     import Tkinter as Tk

@@ -53,7 +53,8 @@ class crop:
 		        cv2.rectangle(i, (self.x_start, self.y_start), (self.x_end, self.y_end), (255, 0, 0), 2)
 		        cv2.imshow("image", i)
 
-		    cv2.waitKey(1)
+		    if cv2.waitKey(0)=='k':
+		    	break
 
 		# close all open windows
 		cv2.destroyAllWindows()
