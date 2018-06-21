@@ -59,10 +59,12 @@ class Warp:
 				#Determine which tesselation triangle contains each pixel in the shape norm image
 				if i < 0 or i >= outArr.shape[1]: continue
 				if j < 0 or j >= outArr.shape[0]: continue
+				print("inTriangle",inTriangle)
 
 				#Determine which triangle the destination pixel occupies
 				tri = inTriangle[i,j]
-				if tri.all() == -1:
+				print("tri",tri)
+				if tri == -1:
 					continue
 					
 				#Calculate position in the input image
@@ -105,7 +107,7 @@ class Warp:
 		#print xmin, xmax, ymin, ymax
 
 		#Determine which tesselation triangle contains each pixel in the shape norm image
-		inTessTriangle = np.ones(dstIm.shape, dtype=np.int) * -1
+		inTessTriangle = np.ones(dstIm.shape[0:2], dtype=np.int) * -1
 		print (inTessTriangle)
 		for i in range(int(xmin), int(xmax+1.)):
 			for j in range(int(ymin), int(ymax+1.)):
