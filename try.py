@@ -20,14 +20,17 @@ if sys.version_info[0] < 3:
     import Tkinter as Tk
 else:
     import tkinter as Tk
-srclist=[(133.09375000000011, 677.625), (339.34375000000011, 952.625), (561.21875000000011, 112.0), (773.71875000000011, 115.125)]
-dstlist=[(-10.0, 100.0), (-20.0, 110.0), (10.0, 120.0), (10.0, 130.0)]
-img = cv2.imread(imgLoc)
-im_resized2 = cv2.resize(img,(1000,1000))
+srclist=[]
+dstlist=[]
+#img = cv2.imread(imgLoc)
+#im_resized2 = cv2.resize(img,(1000,1000))
 f = Figure(figsize=(5, 4), dpi=100)
 a = f.add_subplot(111)
+img=Image.open(imgLoc)
+im_resized2=img.resize((5000,5000),Image.ANTIALIAS)	
 
-dstImg=im_resized2
+	#Create destination image
+dstImg = Image.new(img.mode,(5000,5000))
 root = Tk.Tk()
 root.wm_title("Embedding in TK")
 
@@ -49,7 +52,7 @@ def printsrc():
 def startWarping():
    global dstImg
    dstImg=warp.Warping(im_resized2,srclist,dstImg,dstlist)
-   cv2.imshow("warped",dstImg)
+   dstImg.show()
 
 #edges=cv2.Canny(im_resized,224,224)
 

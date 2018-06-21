@@ -1,12 +1,9 @@
 from PIL import Image
 import numpy as np
 import math
-import cv2
 import scipy.spatial as spatial
-import scipy.misc
 
 class Warp:
-
 	def GetBilinearPixel(self,imArr, posX, posY, out):
 
 		#Get integer and fractional parts of numbers
@@ -30,10 +27,7 @@ class Warp:
 
 		return None #Helps with profiling view
 
-	def WarpProcessing(self,inIm, inArr, 
-			outArr, 
-			inTriangle, 
-			triAffines, shape):
+	def WarpProcessing(self,inIm, inArr, outArr, inTriangle, triAffines, shape):
 
 		#Ensure images are 3D arrays
 		px = np.empty((inArr.shape[2],), dtype=np.int32)
@@ -59,12 +53,10 @@ class Warp:
 				#Determine which tesselation triangle contains each pixel in the shape norm image
 				if i < 0 or i >= outArr.shape[1]: continue
 				if j < 0 or j >= outArr.shape[0]: continue
-				print("inTriangle",inTriangle)
 
 				#Determine which triangle the destination pixel occupies
 				tri = inTriangle[i,j]
-				print("tri",tri)
-				if tri == -1:
+				if tri == -1: 
 					continue
 					
 				#Calculate position in the input image
@@ -107,8 +99,7 @@ class Warp:
 		#print xmin, xmax, ymin, ymax
 
 		#Determine which tesselation triangle contains each pixel in the shape norm image
-		inTessTriangle = np.ones(dstIm.shape[0:2], dtype=np.int) * -1
-		print (inTessTriangle)
+		inTessTriangle = np.ones(dstIm.size, dtype=np.int) * -1
 		for i in range(int(xmin), int(xmax+1.)):
 			for j in range(int(ymin), int(ymax+1.)):
 				if i < 0 or i >= inTessTriangle.shape[0]: continue
@@ -128,8 +119,8 @@ class Warp:
 
 		#Prepare arrays, check they are 3D	
 		targetArr = np.copy(np.asarray(dstIm, dtype=np.uint8))
-		srcArr = srcArr.reshape(srcArr.shape[0], srcArr.shape[1], srcIm.shape[2])
-		targetArr = targetArr.reshape(targetArr.shape[0], targetArr.shape[1], dstIm.shape[2])
+		srcArr = srcArr.reshape(srcArr.shape[0], srcArr.shape[1], len(srcIm.mode))
+		targetArr = targetArr.reshape(targetArr.shape[0], targetArr.shape[1], len(dstIm.mode))
 
 		#Calculate pixel colours
 		self.WarpProcessing(srcIm, srcArr, targetArr, inTessTriangle, triAffines, dstPoints)
@@ -137,7 +128,7 @@ class Warp:
 		#Convert single channel images to 2D
 		if targetArr.shape[2] == 1:
 			targetArr = targetArr.reshape((targetArr.shape[0],targetArr.shape[1]))
-		dstIm=scipy.misc.toimage(targetArr)
+		dstIm.paste(Image.fromarray(targetArr))
 
 def Warping(srcIm,srcCloud,dstIm,dstCloud):
 	warpObj=Warp()
