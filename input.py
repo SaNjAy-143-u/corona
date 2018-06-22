@@ -13,6 +13,7 @@ import sys
 
 class Ui_MainWindow(object):
 
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 275)
@@ -70,6 +71,7 @@ class Ui_MainWindow(object):
 
         self.browseInput.clicked.connect(self.openFileNameDialog)
         self.browseOutput.clicked.connect(self.openFolderNameDialog)
+        self.next.clicked.connect(self.nextClick)
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -97,13 +99,25 @@ class Ui_MainWindow(object):
 
         self.outputText.setText(folderName)
 
+    def nextClick(self):
+        global inp, out
+        self.inp=str(self.inputText.text())
+        self.out =str(self.outputText.text())
+        MainWindow.close()
+
+
 
 def inputWindow():
-
+    global MainWindow
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
-    sys.exit(app.exec_())
+
+    app.exec_()
+    return ui.inp, ui.out
+
+
+
 
