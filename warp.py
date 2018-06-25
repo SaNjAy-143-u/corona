@@ -130,7 +130,7 @@ class Warp:
 			targetArr = targetArr.reshape((targetArr.shape[0],targetArr.shape[1]))
 		dstIm.paste(Image.fromarray(targetArr))
 
-def Warping(srcIm,srcCloud,dstIm,dstCloud):
+def warping(srcIm,srcCloud,dstIm,dstCloud):
 	warpObj=Warp()
 	warpObj.PiecewiseAffineTransform(srcIm, srcCloud, dstIm, dstCloud)
 
